@@ -31,6 +31,16 @@ jobs:
           pip install pytest pytest-cov
           pip install -e .
 
+      - name: Check key imports
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          python -c "import PyQt5; print('PyQt5 OK')"
+          python -c "import gmsh; print('gmsh OK')"
+          python -c "import meshio; print('meshio OK')"
+          python -c "import shapely; print('shapely OK')"
+          python -c "import mesh_gui_project; print('mesh_gui_project OK')"
+
       - name: Run tests (excluding slow tests)
         env:
           QT_QPA_PLATFORM: offscreen
