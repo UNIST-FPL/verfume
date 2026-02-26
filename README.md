@@ -8,7 +8,7 @@ Install [uv](https://docs.astral.sh/uv/) if you don't have it, then sync the pro
 
 ```bash
 pip install uv       # or: curl -LsSf https://astral.sh/uv/install.sh | sh
-uv sync --extra dev
+uv sync --extra dev --extra optional
 ```
 
 ### Run the tests
