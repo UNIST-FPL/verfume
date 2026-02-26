@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mesh-gui-project"
+version = "0.1.0"
+description = "A PyQt5 application for generating flux-surface-aligned meshes from gEQDSK files"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "PyQt5>=5.15.0",
+    "numpy>=1.20.0",
+    "scipy>=1.7.0",
+    "matplotlib>=3.4.0",
+    "meshio>=5.0.0",
+    "gmsh>=4.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+]
+optional = [
+    "shapely>=1.8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

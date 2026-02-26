@@ -1,0 +1,10 @@
+# Core dependencies for mesh_gui_project
+PyQt5>=5.15.0
+numpy>=1.20.0
+scipy>=1.7.0
+matplotlib>=3.4.0
+meshio>=5.0.0
+gmsh>=4.8.0
+
+# Optional dependencies
+shapely>=1.8.0
