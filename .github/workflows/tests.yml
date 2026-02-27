@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.11"
-          cache: "pip"
+          enable-cache: true
 
       - name: Install Qt system dependencies
         run: |
@@ -25,24 +25,19 @@ jobs:
           sudo apt-get install -y libgl1 libegl1 libxkbcommon-x11-0 libglu1-mesa
 
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-cov
-          pip install -e .
+        run: uv sync --extra dev --extra optional
 
       - name: Check key imports
         env:
           QT_QPA_PLATFORM: offscreen
         run: |
-          python -c "import PyQt5; print('PyQt5 OK')"
-          python -c "import gmsh; print('gmsh OK')"
-          python -c "import meshio; print('meshio OK')"
-          python -c "import shapely; print('shapely OK')"
-          python -c "import mesh_gui_project; print('mesh_gui_project OK')"
+          uv run python -c "import PyQt5; print('PyQt5 OK')"
+          uv run python -c "import gmsh; print('gmsh OK')"
+          uv run python -c "import meshio; print('meshio OK')"
+          uv run python -c "import shapely; print('shapely OK')"
+          uv run python -c "import mesh_gui_project; print('mesh_gui_project OK')"
 
       - name: Run tests (excluding slow tests)
         env:
           QT_QPA_PLATFORM: offscreen
-        run: |
-          python -m pytest tests/ -v -m "not slow" --tb=short
+        run: uv run pytest tests/ -v -m "not slow" --tb=short
