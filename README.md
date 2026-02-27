@@ -14,11 +14,11 @@ uv sync --extra dev --extra optional
 ### Run the tests
 
 ```bash
-# Run the full test suite — required before opening a pull request
-uv run pytest tests/ -v
-
-# Skip slow tests for a faster feedback loop during development
+# During development — skip slow tests for a fast feedback loop
 uv run pytest tests/ -v -m "not slow"
+
+# Before opening a pull request — run the full suite including slow tests
+uv run pytest tests/ -v
 
 # Run a single test module
 uv run pytest tests/test_geqdsk_parser.py -v
@@ -27,7 +27,12 @@ uv run pytest tests/test_geqdsk_parser.py -v
 uv run pytest tests/ --cov=mesh_gui_project --cov-report=html
 ```
 
-> **Before submitting a pull request**, run `uv run pytest tests/ -v` and confirm all tests pass.
+> **Before submitting a pull request**, run the full suite (`uv run pytest tests/ -v`,
+> including slow tests) locally and confirm all tests pass.
+>
+> Note: the CI workflow runs only the non-slow subset (`-m "not slow"`) to keep
+> build times short. Slow tests are **not** verified by CI, so they are your
+> responsibility to run locally before requesting a review.
 > Pull requests with failing tests will not be merged.
 
 ---
