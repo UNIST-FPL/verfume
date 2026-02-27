@@ -1,3 +1,29 @@
+## Running the Application
+
+### Setup
+
+Install [uv](https://docs.astral.sh/uv/) if you don't have it, then install the project:
+
+```bash
+pip install uv       # or: curl -LsSf https://astral.sh/uv/install.sh | sh
+uv sync --extra optional
+```
+
+### Launch
+
+```bash
+# Open the GUI (empty, no file loaded)
+uv run python main.py
+
+# Open the GUI with a gEQDSK file loaded immediately
+uv run python main.py examples/kstar_EFIT01_35582_010000.esy_headerMod.geqdsk
+```
+
+The application window will open. Use **File → Open gEQDSK** (or `Ctrl+O`) to load an
+equilibrium file if you did not pass one on the command line.
+
+---
+
 ## Running Tests
 
 This project ships with a test suite under `tests/`. All contributors are expected to run the full test suite before submitting a pull request and ensure every test passes.
